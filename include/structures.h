@@ -19,18 +19,18 @@ using namespace std;
 typedef struct v {
 	int left;
 	int right;
-    int bdd;
+	int bdd;
 } vertex;
 
 typedef struct triple_struct {
-    int var;
-    int low;
-    int high;
+	int var;
+	int low;
+	int high;
 } triple;
 
 typedef struct duo_struct {
-    int u1;
-    int u2;
+	int u1;
+	int u2;
 } duo;
 
 typedef int triple_key;
