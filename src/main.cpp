@@ -182,7 +182,7 @@ int main(int argc, char* argv[])
 	// read the path of the AIG file
 	if(argc != 3)
 	{
-		cout << "Usage: " << argv[0] << " [aig-file] [output-file]" << endl;
+		cout << "Usage: " << argv[0] << " [aig-file] [output-file-prefix]" << endl;
 		return EXIT_FAILURE;
 	}
 	char* aigfile = argv[1];
