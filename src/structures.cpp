@@ -91,7 +91,7 @@ void print_aig(char* filename, vertex*& vertices, int* outputs, int& M, int& I, 
     ofstream aigviz;
     string filepath(filename);
     filepath += "_aig";
-    aigviz.open("outputs/" + filepath + ".dot", fstream::out | fstream::trunc);
+    aigviz.open(filepath + ".dot", fstream::out | fstream::trunc);
 
     if(!aigviz.is_open())
     {
@@ -132,12 +132,12 @@ void print_aig(char* filename, vertex*& vertices, int* outputs, int& M, int& I, 
     aigviz << "}" << endl;
     aigviz.close();
 
-    string command = "dot -Tpng outputs/" + filepath + ".dot > outputs/" + filepath + ".png";
+    string command = "dot -Tpng " + filepath + ".dot > " + filepath + ".png";
     int retcode = system(command.c_str());
     if(retcode != 0) cout << "Error: the AIG visualization could not be generated." << endl;
     else
     {
-        string del_command = "rm outputs/" + filepath + ".dot";
+        string del_command = "rm " + filepath + ".dot";
         int delretcode = system(del_command.c_str());
         if(delretcode != 0) cout << "Error: could not delete the AIG .dot file." << endl;
     }
@@ -150,7 +150,7 @@ void print_bdd(char* filename, vector<triple>& T, int bdd_root, int output_index
     ofstream bddviz;
     string filepath(filename);
     filepath += "_bdd_" + to_string(output_index);
-    bddviz.open("outputs/" + filepath + ".dot", fstream::out | fstream::trunc);
+    bddviz.open(filepath + ".dot", fstream::out | fstream::trunc);
 
     if(!bddviz.is_open())
     {
@@ -182,12 +182,12 @@ void print_bdd(char* filename, vector<triple>& T, int bdd_root, int output_index
     bddviz << "}" << endl;
     bddviz.close();
 
-    string command = "dot -Tpng outputs/" + filepath + ".dot > outputs/" + filepath + ".png";
+    string command = "dot -Tpng " + filepath + ".dot > " + filepath + ".png";
     int retcode = system(command.c_str());
     if(retcode != 0) cout << "Error: the BDD visualization could not be generated." << endl;
     else
     {
-        string del_command = "rm outputs/" + filepath + ".dot";
+        string del_command = "rm " + filepath + ".dot";
         int delretcode = system(del_command.c_str());
         if(delretcode != 0) cout << "Error: could not delete the BDD .dot file." << endl;
     }
