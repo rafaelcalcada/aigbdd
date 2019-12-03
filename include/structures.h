@@ -45,4 +45,4 @@ void init_g(unordered_map<duo_key,int>& G);
 void insert_h(unordered_map<triple_key,int>& H, int i, int l, int h, int u);
 void insert_g(unordered_map<duo_key,int>& G, int u1, int u2, int u);
 void print_aig(char* filename, vertex*& vertices, int& M, int& I, int& O);
-void print_bdd(char* filename, vector<triple>& T, int bdd_root);
+void print_bdd(char* filename, vector<triple>& T, int bdd_root, int output_index);

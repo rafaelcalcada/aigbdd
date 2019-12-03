@@ -42,6 +42,7 @@ duo_key keygen_g(duo& d)
 
 void init_t(vector<triple>& T, int max_index)
 {
+    T.clear();
     triple zero = {max_index, -1, -1};
     triple one = {max_index, -1, -1};
     T.push_back(zero);
@@ -143,12 +144,12 @@ void print_aig(char* filename, vertex*& vertices, int* outputs, int& M, int& I, 
 
 }
 
-void print_bdd(char* filename, vector<triple>& T, int bdd_root)
+void print_bdd(char* filename, vector<triple>& T, int bdd_root, int output_index)
 {
 
     ofstream bddviz;
     string filepath(filename);
-    filepath += "_bdd_" + to_string(bdd_root);
+    filepath += "_bdd_" + to_string(output_index);
     bddviz.open("outputs/" + filepath + ".dot", fstream::out | fstream::trunc);
 
     if(!bddviz.is_open())
@@ -171,7 +172,9 @@ void print_bdd(char* filename, vector<triple>& T, int bdd_root)
         stk.pop();
         if(T[u].low > 1) stk.push(T[u].low);
         if(T[u].high > 1) stk.push(T[u].high);
-        bddviz << "  " << u << " [label=\"" << T[u].var * 2 << "\"];" << endl;
+        if(u > 1) bddviz << "  " << u << " [label=\"" << T[u].var * 2 << "\"];" << endl;
+        else if(u == 1) bddviz << "  " << u << " [label=\"1\" style=filled fillcolor=khaki];" << endl;
+        else if(u == 0) bddviz << "  " << u << " [label=\"0\" style=filled fillcolor=khaki];" << endl;
         if(T[u].low != -1) bddviz << "  " << u << " -> " << T[u].low << " [style=dashed];" << endl;
         if(T[u].high != -1) bddviz << "  " << u << " -> " << T[u].high << ";" << endl;
     }

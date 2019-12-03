@@ -56,7 +56,7 @@ int mk(vector<triple>& T, unordered_map<triple_key,int>& H, int i, int l, int h)
 // APP function. See ANDERSEN, H. R. An introduction to binary decision diagrams.
 // In: Lecture Notes for Efficient Algorithms and Programs, 1999. p. 19
 // This is a specialization of APP that applies the AND between 2 BDDs
-int app(vector<triple>& T, unordered_map<triple_key,int>& H, unordered_map<duo_key,int>& G, int u1, int u2)
+int app_and(vector<triple>& T, unordered_map<triple_key,int>& H, unordered_map<duo_key,int>& G, int u1, int u2)
 {
 	duo d = {u1, u2};
 	unordered_map<duo_key,int>::iterator it;
@@ -70,15 +70,46 @@ int app(vector<triple>& T, unordered_map<triple_key,int>& H, unordered_map<duo_k
 	}
 	else if(T[u1].var == T[u2].var)
 	{
-		u = mk(T, H, T[u1].var, app(T, H, G, T[u1].low, T[u2].low), app(T, H, G, T[u1].high, T[u2].high));
+		u = mk(T, H, T[u1].var, app_and(T, H, G, T[u1].low, T[u2].low), app_and(T, H, G, T[u1].high, T[u2].high));
 	}
 	else if(T[u1].var < T[u2].var)
 	{
-		u = mk(T, H, T[u1].var, app(T, H, G, T[u1].low, u2), app(T, H, G, T[u1].high, u2));
+		u = mk(T, H, T[u1].var, app_and(T, H, G, T[u1].low, u2), app_and(T, H, G, T[u1].high, u2));
 	}
 	else if(T[u1].var > T[u2].var)
 	{
-		u = mk(T, H, T[u2].var, app(T, H, G, u1, T[u2].low), app(T, H, G, u1, T[u2].high));
+		u = mk(T, H, T[u2].var, app_and(T, H, G, u1, T[u2].low), app_and(T, H, G, u1, T[u2].high));
+	}
+	insert_g(G, u1, u2, u);
+	return u;
+}
+
+// APP function. See ANDERSEN, H. R. An introduction to binary decision diagrams.
+// In: Lecture Notes for Efficient Algorithms and Programs, 1999. p. 19
+// This is a specialization of APP that applies the NAND between 2 BDDs
+int app_nand(vector<triple>& T, unordered_map<triple_key,int>& H, unordered_map<duo_key,int>& G, int u1, int u2)
+{
+	duo d = {u1, u2};
+	unordered_map<duo_key,int>::iterator it;
+	it = G.find(keygen_g(d));
+	int u = -1;
+	if(it != G.end()) return it->second;
+	else if((u1 == 0 || u1 == 1) && (u2 == 0 || u2 == 1))
+	{
+		if(u1 == 1 && u2 == 1) u = 0;
+		else u = 1;
+	}
+	else if(T[u1].var == T[u2].var)
+	{
+		u = mk(T, H, T[u1].var, app_nand(T, H, G, T[u1].low, T[u2].low), app_nand(T, H, G, T[u1].high, T[u2].high));
+	}
+	else if(T[u1].var < T[u2].var)
+	{
+		u = mk(T, H, T[u1].var, app_nand(T, H, G, T[u1].low, u2), app_nand(T, H, G, T[u1].high, u2));
+	}
+	else if(T[u1].var > T[u2].var)
+	{
+		u = mk(T, H, T[u2].var, app_nand(T, H, G, u1, T[u2].low), app_nand(T, H, G, u1, T[u2].high));
 	}
 	insert_g(G, u1, u2, u);
 	return u;
@@ -87,11 +118,21 @@ int app(vector<triple>& T, unordered_map<triple_key,int>& H, unordered_map<duo_k
 // APPLY function. See ANDERSEN, H. R. An introduction to binary decision diagrams.
 // In: Lecture Notes for Efficient Algorithms and Programs, 1999. p. 19
 // This is a specialization of APPLY that applies AND between 2 BDDs
-int apply(vector<triple>& T, unordered_map<triple_key,int>& H, int u1, int u2)
+int apply_and(vector<triple>& T, unordered_map<triple_key,int>& H, int u1, int u2)
 {
 	unordered_map<duo_key,int> G;
 	init_g(G);
-	return app(T, H, G, u1, u2);
+	return app_and(T, H, G, u1, u2);
+}
+
+// APPLY function. See ANDERSEN, H. R. An introduction to binary decision diagrams.
+// In: Lecture Notes for Efficient Algorithms and Programs, 1999. p. 19
+// This is a specialization of APPLY that applies AND between 2 BDDs
+int apply_nand(vector<triple>& T, unordered_map<triple_key,int>& H, int u1, int u2)
+{
+	unordered_map<duo_key,int> G;
+	init_g(G);
+	return app_nand(T, H, G, u1, u2);
 }
 
 // Apply NOT operation on a BDD swapping 0's and 1's
@@ -131,7 +172,7 @@ int bdd_not(vector<triple>& T, unordered_map<triple_key,int>& H, int bdd_root)
 
 void create_graph(char* filename, int& M, int& I, int& L, int& O, int& A, vertex*& vertices, int*& outputs);
 void print_aig(char* filename, vertex*& vertices, int* outputs, int& M, int& I, int& O);
-void print_bdd(char* filename, vector<triple>& T, int bdd_root);
+void print_bdd(char* filename, vector<triple>& T, int bdd_root, int output_index);
 
 /* MAIN FUNCTION: TRANSFORMS AN AIG INTO A ROBDD
 ******************************************************************************/
@@ -156,22 +197,24 @@ int main(int argc, char* argv[])
 	vector<triple> T;
 	unordered_map<triple_key,int> H;
 	init_t(T, I+1);
-	init_h(H);
-
-	// creates a ROBDD for each input
-	for(int i = 0; i < I; i++)
-	{
-		vertex* v = &vertices[i];
-		v->bdd = mk(T, H, i+1, 0, 1);
-	}
+	init_h(H);	
 
 	// prints the AIG
 	print_aig(argv[2], vertices, outputs, M, I, O);
 
 	for(int i = 0; i < O; i++)
 	{
+
 		int vertex_index = (outputs[i] >> 1) - 1;
-		vertex* v = &vertices[vertex_index];		
+		vertex* v = &vertices[vertex_index];
+
+		// creates a ROBDD for each input
+		for(int j = 0; j < I; j++)
+		{
+			vertex* w = &vertices[j];
+			w->bdd = mk(T, H, j+1, 0, 1);
+		}	
+
 		while(v != NULL)
 		{
 			int left_index = v->left / 2 - 1;
@@ -194,9 +237,9 @@ int main(int argc, char* argv[])
 			{   
 				int bdd_left = left->bdd;
 				int bdd_right = right->bdd;
-				if(v->left & 1 == 1) bdd_left = bdd_not(T, H, bdd_left);
-				if(v->right & 1 == 1) bdd_right = bdd_not(T, H, bdd_right);
-				v->bdd = apply(T, H, bdd_right, bdd_left);
+				if(v->left & 1 == 1) bdd_left = apply_nand(T, H, bdd_left, bdd_left);
+				if(v->right & 1 == 1) bdd_right = apply_nand(T, H, bdd_right, bdd_right);
+				v->bdd = apply_and(T, H, bdd_right, bdd_left);
 				if(stk->empty()) v = NULL;
 				else
 				{
@@ -206,10 +249,19 @@ int main(int argc, char* argv[])
 				}
 			}
 		}
+
 		vertex_index = (outputs[i] >> 1) - 1;
 		v = &vertices[vertex_index];
-		if(outputs[i] & 1 == 1) v->bdd = bdd_not(T, H, v->bdd);
-		print_bdd(argv[2], T, v->bdd);
+		if(outputs[i] & 1 == 1) v->bdd = apply_nand(T, H, v->bdd, v->bdd);
+		print_bdd(argv[2], T, v->bdd, i);
+
+		// erase the results for the next iteration
+		for(int j = I; j < I+A; j++) 
+		{
+			vertex* w = &vertices[j];
+			w->bdd = -1;
+		}
+
 	}
 
 	return EXIT_SUCCESS;
