@@ -130,7 +130,7 @@ int bdd_not(vector<triple>& T, unordered_map<triple_key,int>& H, int bdd_root)
 }
 
 void create_graph(char* filename, int& M, int& I, int& L, int& O, int& A, vertex*& vertices, int*& outputs);
-void print_aig(char* filename, stack<int, std::vector<int>>* stk, int vertex_index, vertex*& vertices, int output_index, int& O, int& I);
+void print_aig(char* filename, vertex*& vertices, int* outputs, int& M, int& I, int& O);
 void print_bdd(char* filename, vector<triple>& T, int bdd_root);
 
 /* MAIN FUNCTION: TRANSFORMS AN AIG INTO A ROBDD
@@ -165,11 +165,13 @@ int main(int argc, char* argv[])
 		v->bdd = mk(T, H, i+1, 0, 1);
 	}
 
+	// prints the AIG
+	print_aig(argv[2], vertices, outputs, M, I, O);
+
 	for(int i = 0; i < O; i++)
 	{
 		int vertex_index = (outputs[i] >> 1) - 1;
-		vertex* v = &vertices[vertex_index];
-		if(v != NULL) print_aig(argv[2], stk, vertex_index, vertices, i, O, I);
+		vertex* v = &vertices[vertex_index];		
 		while(v != NULL)
 		{
 			int left_index = v->left / 2 - 1;

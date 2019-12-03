@@ -16,6 +16,7 @@
 #include <fstream>
 #include <string>
 #include <stack>
+#include <cstdlib>
 
 // Pairing function that creates a bijection between a triple
 // and an integer number (the key)
@@ -83,13 +84,13 @@ void insert_g(unordered_map<duo_key, int>& G, int u1, int u2, int u)
     else G.insert(pair<duo_key,int>(keygen_g(d),u));
 }
 
-void print_aig(char* filename, stack<int, std::vector<int>>* stk, int vertex_index, vertex*& vertices, int output_index, int& O, int& I)
+void print_aig(char* filename, vertex*& vertices, int* outputs, int& M, int& I, int& O)
 {
 
     ofstream aigviz;
     string filepath(filename);
-    filepath += "_" + to_string(output_index) + ".dot";
-    aigviz.open(filepath, fstream::out | fstream::trunc);
+    filepath += "_aig";
+    aigviz.open("outputs/" + filepath + ".dot", fstream::out | fstream::trunc);
 
     if(!aigviz.is_open())
     {
@@ -97,52 +98,58 @@ void print_aig(char* filename, stack<int, std::vector<int>>* stk, int vertex_ind
         exit(EXIT_FAILURE);
     }
 
+    unordered_map<int, int> outs;
+    for(int i = 0; i < O; i++) outs.insert(pair<int,int>((outputs[i] >> 1) - 1, outputs[i]));
+
     aigviz << "strict digraph {" << endl;
 
-    vertex* v = &vertices[vertex_index];
-	while(v != NULL)
+    for(int i = 0; i < M; i++)
 	{        
+        vertex* v = &vertices[i];
+        int vertex_index = i;
 		int left_index = v->left / 2 - 1;
 		int right_index = v->right / 2 - 1;
 		if(left_index != -1)
 		{
-			stk->push(left_index);
             aigviz << "  " << vertex_index << " -> " << left_index;
             if(v->left & 1 == 1) aigviz << " [style=dashed dir=back];" << endl;
             else aigviz << " [dir=back];" << endl;
 		}
 		if(right_index != -1)
 		{
-			stk->push(right_index);
 			aigviz << "  " << vertex_index << " -> " << right_index;
             if(v->right & 1 == 1) aigviz << " [style=dashed dir=back];" << endl;
             else aigviz << " [dir=back];" << endl;
 		}
-	    if(vertex_index >= I) aigviz << "  " << vertex_index << " [label=\"" << (vertex_index+1)*2 << "\"];" << endl;
+        unordered_map<int,int>::iterator it;
+        it = outs.find(vertex_index);
+        if(it != outs.end()) aigviz << "  " << vertex_index << " [label=\"" << it->second << "\" style=filled fillcolor=khaki];" << endl;
+	    else if(vertex_index >= I) aigviz << "  " << vertex_index << " [label=\"" << (vertex_index+1)*2 << "\"];" << endl;
         else aigviz << "  subgraph cluster0 { style=invis; " << vertex_index << " [shape=square label=\"" << (vertex_index+1)*2 << "\"]; }" << endl;
-		if(stk->empty()) v = NULL;
-		else
-		{
-            vertex_index = stk->top();
-			stk->pop();
-			v = &vertices[vertex_index];
-		}
 	}
 
     aigviz << "}" << endl;
     aigviz.close();
+
+    string command = "dot -Tpng outputs/" + filepath + ".dot > outputs/" + filepath + ".png";
+    int retcode = system(command.c_str());
+    if(retcode != 0) cout << "Error: the AIG visualization could not be generated." << endl;
+    else
+    {
+        string del_command = "rm outputs/" + filepath + ".dot";
+        int delretcode = system(del_command.c_str());
+        if(delretcode != 0) cout << "Error: could not delete the AIG .dot file." << endl;
+    }
 
 }
 
 void print_bdd(char* filename, vector<triple>& T, int bdd_root)
 {
 
-    if(bdd_root < 3) return;
-    
     ofstream bddviz;
     string filepath(filename);
-    filepath += "_bdd_" + to_string(bdd_root) + ".dot";
-    bddviz.open(filepath, fstream::out | fstream::trunc);
+    filepath += "_bdd_" + to_string(bdd_root);
+    bddviz.open("outputs/" + filepath + ".dot", fstream::out | fstream::trunc);
 
     if(!bddviz.is_open())
     {
@@ -165,11 +172,21 @@ void print_bdd(char* filename, vector<triple>& T, int bdd_root)
         if(T[u].low > 1) stk.push(T[u].low);
         if(T[u].high > 1) stk.push(T[u].high);
         bddviz << "  " << u << " [label=\"" << T[u].var * 2 << "\"];" << endl;
-        bddviz << "  " << u << " -> " << T[u].low << " [style=dashed];" << endl;
-        bddviz << "  " << u << " -> " << T[u].high << ";" << endl;
+        if(T[u].low != -1) bddviz << "  " << u << " -> " << T[u].low << " [style=dashed];" << endl;
+        if(T[u].high != -1) bddviz << "  " << u << " -> " << T[u].high << ";" << endl;
     }
 
     bddviz << "}" << endl;
     bddviz.close();
+
+    string command = "dot -Tpng outputs/" + filepath + ".dot > outputs/" + filepath + ".png";
+    int retcode = system(command.c_str());
+    if(retcode != 0) cout << "Error: the BDD visualization could not be generated." << endl;
+    else
+    {
+        string del_command = "rm outputs/" + filepath + ".dot";
+        int delretcode = system(del_command.c_str());
+        if(delretcode != 0) cout << "Error: could not delete the BDD .dot file." << endl;
+    }
 
 }
