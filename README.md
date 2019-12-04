@@ -17,10 +17,12 @@ Clone the project in your computer using Git. If you don't have Git installed, r
 ```
 sudo apt-get install git
 ```
-
-To clone and make the project, run:
+The command to clone the project is:
 ```
 git clone https://github.com/rafaelcalcada/aigbdd.git
+```
+To build `aiglec` and `aigviz`, run `make`:
+```
 cd ./aigbdd
 make
 ```
