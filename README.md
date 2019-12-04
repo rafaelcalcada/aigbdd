@@ -33,7 +33,7 @@ To check the logical equivalence between 2 distinct AIGs, type:
 ```
 ./aiglec [aig-file-1] [aig-file-2]
 ```
-You can generate a graphical visualization for both AIGs and their associated BDDs appending `-v` in the command line. For example:
+You can generate graphical visualization for both AIGs (and their associated BDDs) appending `-v` in the command line. For example:
 ```
 ./aiglec graph/test1.aag graph/test2.aag -v
 ```
