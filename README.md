@@ -43,4 +43,4 @@ If you're interested in generating graphic visualization for an AIG, use `aigviz
 ```
 
 ### Project info
-This work was done under the orientation of Professor André Reis, as the final work of his Logic Synthesis course. He gave valuable lessons about logic synthesis algorithms.
+This work was done under the orientation of Professor André Reis as the final work of his Logic Synthesis course. He gave valuable lessons about logic synthesis algorithms.
