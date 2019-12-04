@@ -44,7 +44,7 @@ void init_t(vector<triple>& T, int max_index)
 {
     T.clear();
     triple zero = {max_index, -1, -1};
-    triple one = {max_index, -1, -1};
+    triple one = {max_index+1, -1, -1};
     T.push_back(zero);
     T.push_back(one);
 }
