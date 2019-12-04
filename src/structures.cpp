@@ -85,7 +85,7 @@ void insert_g(unordered_map<duo_key, int>& G, int u1, int u2, int u)
     else G.insert(pair<duo_key,int>(keygen_g(d),u));
 }
 
-void print_aig(char* filename, vertex*& vertices, int* outputs, int& M, int& I, int& O)
+void print_aig(string filename, vertex*& vertices, int* outputs, int& M, int& I, int& O)
 {
 
     ofstream aigviz;
@@ -144,7 +144,7 @@ void print_aig(char* filename, vertex*& vertices, int* outputs, int& M, int& I, 
 
 }
 
-void print_bdd(char* filename, vector<triple>& T, int bdd_root, int output_index)
+void print_bdd(string filename, vector<triple>& T, int bdd_root, int output_index)
 {
 
     ofstream bddviz;
@@ -191,5 +191,27 @@ void print_bdd(char* filename, vector<triple>& T, int bdd_root, int output_index
         int delretcode = system(del_command.c_str());
         if(delretcode != 0) cout << "Error: could not delete the BDD .dot file." << endl;
     }
+
+}
+
+string bdd_signature(vector<triple>& T, int bdd_root)
+{
+
+    string signature = "";
+    stack<int, vector<int>> stk;
+    stk.push(bdd_root);
+
+    while(!stk.empty())
+    {
+        int u = stk.top();
+        stk.pop();
+        signature += "n" + to_string(T[u].var);
+        signature += "f1" + to_string(T[T[u].low].var);
+        signature += "f2" + to_string(T[T[u].high].var);
+        if(T[u].low > 1) stk.push(T[u].low);
+        if(T[u].high > 1) stk.push(T[u].high);
+    }
+
+    return signature;
 
 }

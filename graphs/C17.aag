@@ -1,0 +1,25 @@
+aag 11 5 0 2 6
+2
+4
+6
+8
+10
+19
+23
+12 6 2
+14 8 6
+16 15 4
+18 17 13
+20 15 10
+22 21 17
+i0 pi0
+i1 pi1
+i2 pi2
+i3 pi3
+i4 pi4
+o0 po0
+o1 po1
+c
+C17.iscas
+This file was written by ABC on Wed Mar 14 13:49:39 2012
+For information about AIGER format, refer to http://fmv.jku.at/aiger

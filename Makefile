@@ -1,9 +1,12 @@
 INC=-I./include
 
-all: eqc
+all: aiglec
 
-eqc: src/main.cpp src/aigreader.cpp src/structures.cpp
-	g++ $(INC) -O3 src/main.cpp src/aigreader.cpp src/structures.cpp -o ./bin/eqc
+aiglec: src/aiglec.cpp src/aigreader.cpp src/structures.cpp
+	g++ $(INC) -O3 src/aiglec.cpp src/aigreader.cpp src/structures.cpp -o aiglec
 
 clean:
-	rm -rf ./bin/eqc *.png
+	rm -rf *.png
+
+distclean:
+	rm -rf aiglec
