@@ -18,7 +18,7 @@ Clone the project in your computer using Git. If you don't have Git installed, r
 sudo apt-get install git
 ```
 
-To clone the project (with Git already installed), type:
+To clone and make the project, run:
 ```
 git clone https://github.com/rafaelcalcada/aigbdd.git
 cd ./aigbdd
