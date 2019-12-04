@@ -4,7 +4,7 @@
 // Engineer: Rafael de Oliveira Calçada
 //
 // Create Date: 01.12.2019 14:24:35
-// Description: Check the logical equivalence between 2 AIGs
+// Description: Generates visualization files for an AIG and its associated BDD
 //
 // Revision:
 // Revision 0.01 - File created
