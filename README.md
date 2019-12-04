@@ -37,7 +37,7 @@ You can generate graphical visualization for both AIGs (and their associated BDD
 ```
 ./aiglec graph/test1.aag graph/test2.aag -v
 ```
-If you're interested in generating graphic visualization for an AIG, you can use `aigviz`. Type:
+If you're interested in generating graphic visualization for an AIG, use `aigviz`:
 ```
 ./aigviz [aig-file]
 ```
