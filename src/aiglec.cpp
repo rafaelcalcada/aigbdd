@@ -4,7 +4,7 @@
 // Engineer: Rafael de Oliveira Calçada
 //
 // Create Date: 01.12.2019 14:24:35
-// Description: Transforms an AIG into a ROBDD
+// Description: Check the logical equivalence between 2 AIGs
 //
 // Revision:
 // Revision 0.01 - File created
@@ -340,6 +340,18 @@ int main(int argc, char* argv[])
 		}
 
 	}
+
+	bool equivalents = true;
+	for(int i = 0; i < O; i++)
+	{
+		if(aig1signatures[i].compare(aig2signatures[i]) != 0)
+		{
+			equivalents = false;
+			break;
+		}
+	}
+	if(equivalents) cout << "RESULT: The AIGs are logical equivalents." << endl;
+	else cout << "RESULT: The AIGs are NOT logical equivalents." << endl;
 
 	return EXIT_SUCCESS;
 
