@@ -5,7 +5,7 @@ This project consists of two programs, `aiglec` and `aigviz`. The first can fast
 
 ### Dependencies
 
-To generate the visualization files, you will need GraphViz. You will also need `g++` to compile the source code. To install them on your computer, type:
+To generate the visualization files, you will need GraphViz. You will also need `g++` to compile the source code. To install them in your computer, type:
 ```
 sudo apt-get install graphviz g++
 ```
