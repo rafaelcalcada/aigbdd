@@ -6,7 +6,7 @@ The AIG files must be in the AIGER format (binary or ASCII).
 
 ### Dependencies
 
-To generate the visualization files you will need GraphViz. You will also need `g++` to compile the source code. To install them in your computer, type:
+GraphViz is needed to generate graphical visualization. You will also need `g++` to compile the source code. To install them in your computer, type in your terminal:
 ```
 sudo apt-get install graphviz g++
 ```
