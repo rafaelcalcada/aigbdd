@@ -41,4 +41,4 @@ If you're interested only in generating a graphic visualization for a single AIG
 ```
 
 ### Project info
-This work was done for the discipline CAD for Logic Synthesis, under the supervision of professor André Reis, who gave us valuable lessons about logic synthesis algorithms.
+This work was done under the orientation of Professor André Reis, as the final work of his Logic Synthesis course. He gave valuable lessons about logic synthesis algorithms.
