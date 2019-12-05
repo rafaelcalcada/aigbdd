@@ -13,7 +13,7 @@
 * [Usage](#usage)
 * [License](#license)
 * [Contact](#contact)
-* [Acknowledgements](#acknowledgements)
+* [Acknowledgments](#acknowledgments)
 
 
 
@@ -74,6 +74,6 @@ Rafael Calçada - rafaelcalcada@hotmail.com
 Project Link: [https://github.com/rafaelcalcada/aigbdd](https://github.com/rafaelcalcada/aigbdd)
 
 <!-- ACKNOWLEDGEMENTS -->
-## Acknowledgements
+## Acknowledgments
 
 This work was done under the orientation of Professor [André Reis](http://www.inf.ufrgs.br/~andreis/) as the final work of his Logic Synthesis course. He gave valuable lessons about logic synthesis algorithms.
