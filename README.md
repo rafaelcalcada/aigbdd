@@ -1,5 +1,5 @@
-<h1 align="center">AIGBDD</h1>
-<h2 align="center">Logical Equivalence Checker</h1>
+<h3 align="center">AIGBDD</h1>
+<h4 align="center">Logical Equivalence Checker</h1>
 
 
 
