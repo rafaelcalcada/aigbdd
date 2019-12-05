@@ -1,4 +1,4 @@
-<h1 align="center">And-Inverter Graph<br>Logical Equivalence Checker</h1>
+<h1 align="center">AIG<br>Logical Equivalence Checker</h1>
 
 
 
