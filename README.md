@@ -1,6 +1,4 @@
-<p align="center">
-  <h1 align="center">And-Inverter Graph<br>Logical Equivalence Checker</h1>
-</p>
+<h1 align="center">And-Inverter Graph<br>Logical Equivalence Checker</h1>
 
 
 
