@@ -1,12 +1,8 @@
-[![MIT License][license-shield]][license-url]
-
-
-
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
 
-  <h3 align="center">And-Inverter Graph<br>Logical Equivalence Checker</h3>
+  <h1 align="center">And-Inverter Graph<br>Logical Equivalence Checker</h1>
 
 </p>
 
