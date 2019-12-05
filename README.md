@@ -75,3 +75,5 @@ Project Link: [https://github.com/rafaelcalcada/aigbdd](https://github.com/rafae
 ### Acknowledgments
 
 This work was done under the orientation of Professor [André Reis](http://www.inf.ufrgs.br/~andreis/) as the final work of his Logic Synthesis course. He gave valuable lessons about logic synthesis algorithms.
+
+I also thank my colleague [Francisco Knebel](https://github.com/FranciscoKnebel) for the tips on how to make a decent README page.
