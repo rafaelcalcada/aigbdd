@@ -18,14 +18,14 @@
 
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
+### About The Project
 
 This project consists of two programs, `aiglec` and `aigviz`. The first can fast check the logical equivalence between 2 small AIGs (with up to 10 inputs) using Reduced Ordered Binary Decision Diagrams (BDDs). The second generates graphic visualization for an AIG and its associated BDD.
 
 The AIG files must be in the AIGER format (binary or ASCII).
 
 <!-- GETTING STARTED -->
-## Dependencies
+### Dependencies
 
 [GraphViz](https://graphviz.org/about/) is needed to generate graphical visualization. You will also need `g++` and `make` to compile the source code. To install them in a computer with Ubuntu, open a terminal and type:
 ```
@@ -46,7 +46,7 @@ make
 3. The programs are now ready to use.
 
 <!-- USAGE EXAMPLES -->
-## Usage
+### Usage
 
 To check the logical equivalence between 2 distinct AIGs, type:
 ```
@@ -62,18 +62,18 @@ If you're interested in generating graphic visualization for an AIG, use `aigviz
 ```
 
 <!-- LICENSE -->
-## License
+### License
 
 Distributed under the MIT License. See `LICENSE.md` for more information.
 
 <!-- CONTACT -->
-## Contact
+### Contact
 
 Rafael Calçada - rafaelcalcada@hotmail.com
 
 Project Link: [https://github.com/rafaelcalcada/aigbdd](https://github.com/rafaelcalcada/aigbdd)
 
-<!-- ACKNOWLEDGEMENTS -->
-## Acknowledgments
+<!-- ACKNOWLEDGMENTS -->
+### Acknowledgments
 
 This work was done under the orientation of Professor [André Reis](http://www.inf.ufrgs.br/~andreis/) as the final work of his Logic Synthesis course. He gave valuable lessons about logic synthesis algorithms.
