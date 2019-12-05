@@ -3,7 +3,7 @@
 
 
 <!-- TABLE OF CONTENTS -->
-## Table of Contents
+### Table of Contents
 
 * [About the Project](#about-the-project)
 * [Dependencies](#dependencies)
@@ -20,7 +20,7 @@
 
 This project consists of two programs, `aiglec` and `aigviz`. The first can fast check the logical equivalence between 2 small AIGs (with up to 10 inputs) using Reduced Ordered Binary Decision Diagrams (BDDs). The second generates graphic visualization for an AIG and its associated BDD.
 
-The AIG files must be in the AIGER format (binary or ASCII).
+The AIG files must be in the [AIGER](http://fmv.jku.at/aiger/) format (binary or ASCII).
 
 <!-- GETTING STARTED -->
 ### Dependencies
