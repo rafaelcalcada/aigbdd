@@ -1,34 +1,61 @@
-# And-Inverter Graphs Logical Equivalence Checker
+[![MIT License][license-shield]][license-url]
+
+
+
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+
+  <h3 align="center">And-Inverter Graph<br>Logical Equivalence Checker</h3>
+
+</p>
+
+
+
+<!-- TABLE OF CONTENTS -->
+## Table of Contents
+
+* [About the Project](#about-the-project)
+* [Dependencies](#dependencies)
+* [Installation](#installation)
+* [Usage](#usage)
+* [License](#license)
+* [Contact](#contact)
+* [Acknowledgements](#acknowledgements)
+
+
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
 This project consists of two programs, `aiglec` and `aigviz`. The first can fast check the logical equivalence between 2 small AIGs (with up to 10 inputs) using Reduced Ordered Binary Decision Diagrams (BDDs). The second generates graphic visualization for an AIG and its associated BDD.
 
 The AIG files must be in the AIGER format (binary or ASCII).
 
-### Dependencies
+<!-- GETTING STARTED -->
+## Dependencies
 
-GraphViz is needed to generate graphical visualization. You will also need `g++` to compile the source code. To install them in your computer, type in your terminal:
+[GraphViz](https://graphviz.org/about/) is needed to generate graphical visualization. You will also need `g++` and `make` to compile the source code. To install them in a computer with Ubuntu, open a terminal and type:
 ```
-sudo apt-get install graphviz g++
+sudo apt-get install graphviz g++ make
 ```
 
 ### Installation
 
-Clone the project in your computer using Git. If you don't have Git installed, run:
-```
-sudo apt-get install git
-```
-The command to clone the project is:
+1. Clone the project in your computer:
 ```
 git clone https://github.com/rafaelcalcada/aigbdd.git
 ```
-To build `aiglec` and `aigviz`, run `make`:
+2. Open the project directory and build `aiglec` and `aigviz` running `make`:
 ```
 cd ./aigbdd
 make
 ```
-The programs are now ready to use.
+3. The programs are now ready to use.
 
-### Usage
+<!-- USAGE EXAMPLES -->
+## Usage
+
 To check the logical equivalence between 2 distinct AIGs, type:
 ```
 ./aiglec [aig-file-1] [aig-file-2]
@@ -42,5 +69,19 @@ If you're interested in generating graphic visualization for an AIG, use `aigviz
 ./aigviz [aig-file]
 ```
 
-### Project info
-This work was done under the orientation of Professor André Reis as the final work of his Logic Synthesis course. He gave valuable lessons about logic synthesis algorithms.
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See `LICENSE.md` for more information.
+
+<!-- CONTACT -->
+## Contact
+
+Rafael Calçada - rafaelcalcada@hotmail.com
+
+Project Link: [https://github.com/rafaelcalcada/aigbdd](https://github.com/rafaelcalcada/aigbdd)
+
+<!-- ACKNOWLEDGEMENTS -->
+## Acknowledgements
+
+This work was done under the orientation of Professor [André Reis](http://www.inf.ufrgs.br/~andreis/) as the final work of his Logic Synthesis course. He gave valuable lessons about logic synthesis algorithms.
