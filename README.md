@@ -67,7 +67,7 @@ Distributed under the MIT License. See `LICENSE.md` for more information.
 <!-- CONTACT -->
 ### Contact
 
-Rafael Calçada - rafaelcalcada@hotmail.com
+Rafael Calçada - rafaelcalcada@gmail.com
 
 Project Link: [https://github.com/rafaelcalcada/aigbdd](https://github.com/rafaelcalcada/aigbdd)
 
